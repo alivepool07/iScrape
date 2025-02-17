@@ -1,106 +1,4 @@
-// import React, { useState } from 'react';
-// import axios from 'axios';
 
-// const Scraper = () => {
-//     const [url, setUrl] = useState('');
-//     const [types, setTypes] = useState({
-//         text: false,
-//         html: false,
-//         images: false,
-//         links: false,
-//         structuredData: false,
-//     });
-//     const [result, setResult] = useState(null);
-//     const [loading, setLoading] = useState(false);
-//     const [error, setError] = useState('');
-
-//     const handleCheckboxChange = (event) => {
-//         setTypes({
-//             ...types,
-//             [event.target.name]: event.target.checked,
-//         });
-//     };
-
-//     const handleSubmit = async () => {
-//         setLoading(true);
-//         setError('');
-//         setResult(null);
-
-//         try {
-//             const response = await axios.post('http://localhost:5000/scrape', {
-//                 url,
-//                 types: Object.keys(types).filter((key) => types[key]),
-//             });
-//             setResult(response.data);
-//         } catch (error) {
-//             console.error('Error:', error);
-//             setError('Failed to scrape the URL. Please try again.');
-//         } finally {
-//             setLoading(false);
-//         }
-//     };
-
-//     return (
-//         <div className="p-4 max-w-3xl mx-auto">
-//             <h1 className="text-2xl font-bold text-center">Web Scraper</h1>
-
-//             {/* URL Input Field */}
-//             <input
-//                 type="text"
-//                 value={url}
-//                 onChange={(e) => setUrl(e.target.value)}
-//                 placeholder="Enter URL"
-//                 className="border p-2 w-full mt-4"
-//             />
-
-//             {/* Data Types Selection */}
-//             <div className="mt-4">
-//                 <h2 className="text-xl font-semibold">Select Data Types to Scrape:</h2>
-//                 <div className="flex flex-col space-y-2 mt-2">
-//                     {Object.keys(types).map((type) => (
-//                         <label key={type}>
-//                             <input
-//                                 type="checkbox"
-//                                 name={type}
-//                                 checked={types[type]}
-//                                 onChange={handleCheckboxChange}
-//                             />
-//                             <span className="ml-2 capitalize">{type.replace(/([A-Z])/g, ' $1')}</span>
-//                         </label>
-//                     ))}
-//                 </div>
-//             </div>
-
-//             {/* Submit Button */}
-//             <button
-//                 onClick={handleSubmit}
-//                 className="bg-blue-500 text-white p-2 mt-4 rounded w-full"
-//                 disabled={loading}
-//             >
-//                 {loading ? 'Scraping...' : 'Scrape'}
-//             </button>
-
-//             {/* Error Message */}
-//             {error && (
-//                 <div className="mt-4 p-2 bg-red-100 text-red-700 rounded">
-//                     {error}
-//                 </div>
-//             )}
-
-//             {/* Display Scraped Data */}
-//             {result && (
-//                 <div className="mt-8 p-4 bg-gray-100 rounded overflow-auto max-h-96">
-//                     <h2 className="text-xl font-semibold">Scraped Data:</h2>
-//                     <pre className="mt-4 whitespace-pre-wrap">
-//                         {JSON.stringify(result, null, 2)}
-//                     </pre>
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default Scraper;
 import React, { useState } from 'react';
 import axios from 'axios';
 import { saveAs } from 'file-saver';
@@ -130,7 +28,8 @@ const Scraper = () => {
         setErrorMessage('');
         setResult(null);
         try {
-            const response = await axios.post('http://localhost:5000/scrape', {
+           // const response = await axios.post('http://localhost:5000/scrape', {
+            const response = await axios.post('/api/scrape', {
                 url,
                 types: Object.keys(types).filter(key => types[key])
             });
